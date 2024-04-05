@@ -1,0 +1,72 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+}
+
+form {
+    margin: 3rem auto;
+    width: 90%;
+    max-width: 30rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+
+
+button {
+    cursor: pointer;
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    background-color: #3b30ff;
+    color: white;
+    border: 1px solid #1f0050;
+}
+
+button:hover,
+button:active {
+    background-color: #27057e;
+    border-color: #27057e;
+}
+
+.form-control {
+    margin-bottom: 1rem;
+
+}
+
+.form-control input {
+    font: inherit;
+    padding: 0.25rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    display: block;
+    width: 10rem;
+}
+
+.form-control input:focus {
+    outline: none;
+    border-color: #240370;
+    background-color: #f4eeff;
+}
+
+.form-control label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.errorlist {
+    list-style: none;
+    margin: 0.5rem;
+    padding: 0;
+    color: red;
+}
+
+.errors input{
+    border-color: red;
+    background-color: rgb(252, 150, 150);
+}
+
+.errors label {
+    color: red;
+}
