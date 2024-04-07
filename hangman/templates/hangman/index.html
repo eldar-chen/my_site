@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Hangman
+{% endblock %}
+
+
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "hangman/styles.css" %}">
+    <link rel="stylesheet" href="{% static "app.css" %}">
+{% endblock %}
+
+
+
+{% block content %}
+<div class="header">
+    <img src="{% static 'hangman/images/hangman.jpg' %}" alt="Hangman">
+</div>
+<div class="game">
+    <h1>Hangman</h1>
+    <h3>Lives left: {{ hangman_game.lives }}</h3>
+    <h2>Find the hidden word - Enter a letter</h2>
+    <p>Word hint: {{ hangman_game.chosen_hint }}</p>
+    <p>
+        {% for letter in hangman_game.display %}
+            {{ letter }}
+        {% endfor %}
+    </p>
+    <h3>Guess a letter</h3>
+    <form id="hangman-form" method="post">
+        {% csrf_token %}
+        <input type="text" name="guess" id="guess" maxlength="1">
+        <button type="submit">Guess</button>
+    </form>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('guess').focus();
+        });
+    </script>
+</div>
+{% endblock %}

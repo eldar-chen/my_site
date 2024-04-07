@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}You won!{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "hangman/winner.css" %}">
+{% endblock %}
+
+{% block content %}
+    <h1>You won!</h1>
+    <a href="{% url 'hangman' %}">Play again</a>
+{% endblock %}
