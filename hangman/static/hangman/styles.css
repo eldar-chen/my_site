@@ -1,15 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #cbf9d9;
+}
+
 .header {
     text-align: center;
     padding: 20px;
-    background-color: #f2f2f2;
+    background-color: #fffefe;
     border-radius: 12px;
     margin-top: 60px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
 }
 
 .game {
     margin: 0 auto;
     max-width: 600px;
     text-align: center;
+    padding: 20px;
+    background-color: #befabd;
+    border-radius: 12px;
+    margin-top: -20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
@@ -27,6 +39,14 @@ h3 {
     color: #777;
 }
 
+.lives {
+    margin-left: 40%;
+    position: absolute;
+    margin-top: 6.8%;
+    color: #6d0505;
+
+}
+
 p {
     font-size: 1.2em;
     color: #333;
@@ -34,4 +54,14 @@ p {
 
 .header img {
     border-radius: 12px;
+    width: 30%;
+    height: 30%;
+    margin-bottom: 10px;
+}
+
+.image img {
+    border-radius: 12px;
+    width: 30%;
+    height: 30%;
+    
 }

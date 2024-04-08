@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'hangman',
+    'profiles',
 ]
 
 MIDDLEWARE = [
@@ -128,6 +129,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'static/posts'),
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/uploads/')
+MEDIA_URL = '/uploads/'
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 

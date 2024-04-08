@@ -3,7 +3,6 @@ from django.views import View
 from django.http import HttpResponse
 from .models import HangmanGame
 import random
-import logging
 
 
 word_list = [
@@ -164,34 +163,25 @@ word_length = len(chosen_word)
 def create_game():
     default_lives = 6
 
-    chosen_word = random.choice(word_list)
-    word_index = word_list.index(chosen_word)
-    chosen_hint = hint_list[word_index]
-    word_length = len(chosen_word)
+    for index, word in enumerate(word_list):
+        chosen_word = word
+        chosen_hint = hint_list[index]
+        word_length = len(chosen_word)
 
-    game_obj, created = HangmanGame.objects.get_or_create(
-        chosen_word=chosen_word,
-        chosen_hint=chosen_hint,
-        defaults={'word_length': word_length, 'lives': default_lives, 'display': '_' * word_length}
-    )
+        game_obj, created = HangmanGame.objects.get_or_create(
+            chosen_word=chosen_word,
+            chosen_hint=chosen_hint,
+            defaults={'word_length': word_length,
+                      'lives': default_lives, 'display': '_' * word_length}
+        )
 
-    if game_obj.lives < default_lives:
-        print("Deleting entry...")
-        game_obj.delete()
-    elif not created:
-        # Update the existing entry if it already exists
-        game_obj.chosen_hint = chosen_hint
-        game_obj.word_length = word_length
-        game_obj.lives = default_lives
-        game_obj.display = '_' * word_length
-        game_obj.save()
-    elif game_obj.lives < default_lives:
-        print("Deleting entry...")
-        game_obj.delete()
-
-    print(f"Word: {chosen_word}")
-    print(f"Hint: {chosen_hint}")
-    print(f"Lives: {game_obj.lives}")
+        if not created:
+            # Update the existing entry if it already exists
+            game_obj.chosen_hint = chosen_hint
+            game_obj.word_length = word_length
+            game_obj.lives = default_lives
+            game_obj.display = '_' * word_length
+            game_obj.save()
 
 
 create_game()
@@ -204,7 +194,7 @@ class HangmanView(View):
                 hangman_game = HangmanGame.objects.get(
                     pk=request.session['hangman_game_id'])
             except HangmanGame.DoesNotExist:
-                # Handle the case where the HangmanGame does not exist
+                # if hangman does not exist, redirect to start a new game
                 del request.session['hangman_game_id']
                 return redirect('hangman')
         else:
@@ -236,13 +226,14 @@ class HangmanView(View):
                     if "_" not in display_list:
                         # Remove the current game session
                         hangman_game.delete()
+                        create_game()
                         return render(request, 'hangman/you_won.html')
             hangman_game.display = "".join(display_list)
 
         if hangman_game.lives == 0:
-            # return HttpResponse(f'Game over. The word was {hangman_game.chosen_word}.')
             # Remove the current game session
             hangman_game.delete()
+            create_game()
             return render(request, 'hangman/game_over.html')
         hangman_game.save()
 
@@ -253,8 +244,6 @@ def new_game(request):
     if 'hangman_game_id' in request.session:
         del request.session['hangman_game_id']
 
-    create_game()
-
     return redirect('hangman')
 
 
@@ -264,8 +253,6 @@ def you_won(request):
         HangmanGame.objects.filter(id=game_id).delete()
         del request.session['hangman_game_id']
 
-    create_game()
-
     return render(request, 'hangman/you_won.html')
 
 
@@ -274,7 +261,5 @@ def game_over(request):
         game_id = request.session['hangman_game_id']
         HangmanGame.objects.filter(id=game_id).delete()
         del request.session['hangman_game_id']
-
-    create_game()
 
     return render(request, 'hangman/game_over.html')
