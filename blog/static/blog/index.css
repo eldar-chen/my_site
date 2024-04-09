@@ -9,13 +9,16 @@
     padding: 3rem 12%;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
+    text-decoration: none;
   }
   
   #welcome header {
     display: flex;
     align-items: flex-start;
     margin: 3rem auto;
+    text-decoration: none;
   }
+
   
   #welcome img {
     width: 10rem;

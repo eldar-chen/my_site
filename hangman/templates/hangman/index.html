@@ -1,18 +1,16 @@
 {% extends "base.html" %}
 {% load static %}
 
+
 {% block title %}
     Hangman
 {% endblock %}
-
 
 
 {% block css_files %}
     <link rel="stylesheet" href="{% static "hangman/styles.css" %}">
     <link rel="stylesheet" href="{% static "app.css" %}">
 {% endblock %}
-
-
 
 {% block content %}
 <div class="header">
@@ -47,7 +45,6 @@
     </p>
 
 
-
     <h3>Guess a letter</h3>
     <form id="hangman-form" method="post">
         {% csrf_token %}
@@ -55,6 +52,7 @@
         <button type="submit">Guess</button>
     </form>
     
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('guess').focus();

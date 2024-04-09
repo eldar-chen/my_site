@@ -1,5 +1,5 @@
 from django import forms
-from .models import Review
+from .models import Review, Comment
 
 
 class ReviewForm(forms.ModelForm):
@@ -25,3 +25,13 @@ class ReviewForm(forms.ModelForm):
 
         }
 
+class CommentForm(forms.ModelForm):
+    rating = forms.IntegerField(label='Your Rating', min_value=1, max_value=5)
+    class Meta:
+        model = Comment
+        exclude = ['post']
+        labels = {
+            "user_name": "Your Name",
+            "user_email": "Your Email",
+            "text": "Your Feedback",
+        }

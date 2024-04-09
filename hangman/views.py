@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from .models import HangmanGame
 import random
 
-
 word_list = [
     'abruptly',
     'absurd',
@@ -162,19 +161,16 @@ word_length = len(chosen_word)
 
 def create_game():
     default_lives = 6
-
     for index, word in enumerate(word_list):
         chosen_word = word
         chosen_hint = hint_list[index]
         word_length = len(chosen_word)
-
         game_obj, created = HangmanGame.objects.get_or_create(
             chosen_word=chosen_word,
             chosen_hint=chosen_hint,
             defaults={'word_length': word_length,
                       'lives': default_lives, 'display': '_' * word_length}
         )
-
         if not created:
             # Update the existing entry if it already exists
             game_obj.chosen_hint = chosen_hint
@@ -252,7 +248,6 @@ def you_won(request):
         game_id = request.session['hangman_game_id']
         HangmanGame.objects.filter(id=game_id).delete()
         del request.session['hangman_game_id']
-
     return render(request, 'hangman/you_won.html')
 
 
@@ -261,5 +256,4 @@ def game_over(request):
         game_id = request.session['hangman_game_id']
         HangmanGame.objects.filter(id=game_id).delete()
         del request.session['hangman_game_id']
-
     return render(request, 'hangman/game_over.html')

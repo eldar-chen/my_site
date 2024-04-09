@@ -5,6 +5,12 @@ body {
   #main-navigation {
     background-color: #0a0a85d8;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+  }
+
+  #main-navigation a {
+    text-decoration: none;
+    color: white;
   }
   
   #all-posts {
@@ -40,4 +46,5 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     border-radius: 12px;
     background-color: white;
+    text-decoration: none;
   }

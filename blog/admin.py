@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Author, Tag, Review
+from .models import Post, Author, Tag, Review, Comment
 
 # Register your models here.
 class PostAdmin(admin.ModelAdmin):
@@ -15,6 +15,12 @@ class ReviewAdmin(admin.ModelAdmin):
         obj.identified_post = Post.objects.get(slug=form.cleaned_data['post'])
         obj.save()
 
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user_name', 'post')
+
+
+admin.site.register(Comment, CommentAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Author)
 admin.site.register(Tag)
