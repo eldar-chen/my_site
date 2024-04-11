@@ -190,3 +190,22 @@ body {
   font-weight: bold;
   font-size: 0.8rem; 
 }
+
+.read_later {
+  margin: 4rem auto;
+}
+
+.read_later button {
+  background-color: transparent;
+  border: 1px solid white;
+  padding: 0.5rem 2rem;
+  font: inherit;
+  color: white;
+  border-radius: 6px;
+}
+
+.read_later button:hover,
+.read_later button:active {
+  background-color: white;
+  color: black;
+}
