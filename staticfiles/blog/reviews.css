@@ -1,0 +1,33 @@
+.review-card {
+    margin: 3rem auto;
+    width: 100%;
+    max-width: 50rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    margin: 1rem auto;
+}
+
+.review-card h3 {
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.review-card p {
+    color: #666;
+    font-size: 1rem;
+}
+
+
+.review-card p:nth-child(4) {
+    color: #ffcc00;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.review-card p:nth-child(3) {
+    color: #000000;
+    font-weight: bold;
+    font-size: 0.8rem;
+}

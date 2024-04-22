@@ -17,7 +17,7 @@ class ReviewAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('user_name', 'post')
+    list_display = ('user_name', 'text', 'rating', 'post')
 
 
 admin.site.register(Comment, CommentAdmin)

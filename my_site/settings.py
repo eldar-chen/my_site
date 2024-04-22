@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from os import getenv
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,26 +22,29 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h@$t#d!!2y^#!1@h%85p6_vs4s=e9i2(+c86bi+s$@if$412sy'
-
+SECRET_KEY = 'h@$t#d!!2y^#!1@h%85p6_vs4s=e9i2(+c86bi+s$@if$412sy'
+# 'django-insecure-h@$t#d!!2y^#!1@h%85p6_vs4s=e9i2(+c86bi+s$@if$412sy'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = getenv("IS_DEVELOPMENT", True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    getenv("APP_HOST"),
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'blog',
+    # 'hangman',
+    'profiles',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
-    'hangman',
-    'profiles',
+
 ]
 
 MIDDLEWARE = [
@@ -81,8 +85,12 @@ WSGI_APPLICATION = 'my_site.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'django_blog',
+        'PASSWORD': 'sql1pass',
+        'HOST': 'database-1.chuym2qo0s0n.eu-central-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -123,11 +131,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'static/posts'),
+    BASE_DIR / "static",
+    # os.path.join(BASE_DIR, 'static'),
+    # os.path.join(BASE_DIR, 'static/posts'),
 ]
 
 MEDIA_ROOT = BASE_DIR / "uploads"
